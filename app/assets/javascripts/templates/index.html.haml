@@ -1,0 +1,5 @@
+.row
+  .col-sm-2.menu
+    %ul.list-unstyled{"ng-repeat" => "user in users"}
+      %li{"ng-bind" => "user.name"}
+  .col-md-10
