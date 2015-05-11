@@ -1,14 +1,13 @@
 require 'spec_helper.rb'
 
-feature "Users", js: true do
+feature 'users', js: true do
   before do
-    User.create!(name: 'Bronisław Komorowski')
-    User.create!(name: 'Andrzej Duda')
+    create_pair :user
   end
 
-  scenario "view users" do
+  scenario 'view users' do
     visit '/'
-    expect(page).to have_content('Bronisław Komorowski')
-    expect(page).to have_content('Andrzej Duda')
+    expect(page).to have_content User.first.name
+    expect(page).to have_content User.second.name
   end
 end

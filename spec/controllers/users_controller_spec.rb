@@ -1,28 +1,16 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe UsersController do
   render_views
-  describe "index" do
+
+  describe 'index' do
     before do
-      User.create!(name: 'Bronisław Komorowski')
-      User.create!(name: 'Andrzej Duda')
+      create_pair :user
       xhr :get, :index, format: :json
     end
-
-    subject(:results) { JSON.parse(response.body) }
-
-    def extract_name
-      ->(object) { object["name"] }
-    end
-
-    it 'should return two results' do
-      expect(results.size).to eq(2)
-    end
-    it "should include 'Bronisław Komorowski'" do
-      expect(results.map(&extract_name)).to include('Bronisław Komorowski')
-    end
-    it "should include 'Andrezj Duda'" do
-      expect(results.map(&extract_name)).to include('Andrzej Duda')
+    it 'should return two users' do
+      results = JSON.parse response.body
+      expect(results).to match pluck_to_hash(User, :name, :id)
     end
   end
 end

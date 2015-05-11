@@ -1,46 +1,26 @@
 describe 'UsersController', ->
   scope = null
-  ctrl         = null
-  location     = null
-  routeParams  = null
-  resource     = null
-  httpBackend  = null
-
-  users = [
-    {
-      id: 2
-      name: 'Bronisław Komorowski'
-    },
-    {
-      id: 4
-      name: 'Andrzej Duda'
-    }
-  ]
+  httpBackend = null
+  fixture.load 'users.json'
+  users = fixture.json[0]
 
   setupController = ->
-    inject(($location, $routeParams, $rootScope, $resource, $httpBackend, $controller)->
-      scope       = $rootScope.$new()
-      location    = $location
-      resource    = $resource
-      routeParams = $routeParams
+    inject ($location, $rootScope, $httpBackend, $controller) ->
+      scope = $rootScope.$new()
+      location = $location
       httpBackend = $httpBackend
+      httpBackend.expectGET(new RegExp('\/users')).respond users
+      $controller 'UsersController', $scope: scope, $location: location
 
-      request = new RegExp("\/users")
-      httpBackend.expectGET(request).respond(users)
+  beforeEach ->
+    module 'mi'
+    setupController()
+    httpBackend.flush()
 
-      ctrl = $controller('UsersController',
-        $scope: scope
-        $location: location)
-    )
-
-  beforeEach(module("mi"))
-  beforeEach(setupController())
   afterEach ->
     httpBackend.verifyNoOutstandingExpectation()
     httpBackend.verifyNoOutstandingRequest()
 
-  describe 'index', ->
+  describe 'initialization', ->
     it 'loads users from backend', ->
-      httpBackend.flush()
       expect(angular.equals(scope.users, users)).toBeTruthy()
-
