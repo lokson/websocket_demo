@@ -14,17 +14,32 @@
  *= require_self
  */
 
-$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+$icon-font-path: 'bootstrap-sass/assets/fonts/bootstrap/'
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets'
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap'
+@import 'mixins'
 
-body {
-  background: #151618;
-  color: #959595;
-  margin: 0 auto;
-  width: 90%;
-}
+body
+  background: #151618
+  color: #959595
+  margin: 0 auto
+  width: 90%
 
-.menu {
-  background: #212224;
-}
+.menu
+  background: #212224
+
+.ng-enter
+  +transition(opacity, ease-in-out, 0.3s)
+  opacity: 0
+.ng-enter.ng-enter-active
+  opacity: 1
+
+.ng-leave
+  +transition(opacity, ease-in-out, 0.6s)
+  opacity: 1
+.ng-leave.ng-leave-active
+  opacity: 0
+
+.ng-leave-stagger
+  +transition-delay(0.1s)
+  +transition-duration(0s)

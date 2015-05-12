@@ -16,6 +16,7 @@
 //= require angular-route/angular-route
 //= require angular-resource/angular-resource
 //= require angular-flash/dist/angular-flash
+//= require angular-animate/angular-animate
 //= require angular-rails-templates
 //= require_tree ./templates
 //= require_tree .

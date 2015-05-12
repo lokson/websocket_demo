@@ -4,7 +4,8 @@ mi = angular.module 'mi', [
   'ngResource',
   'controllers',
   'angular-flash.service',
-  'angular-flash.flash-alert-directive'
+  'angular-flash.flash-alert-directive',
+  'ngAnimate',
 ]
 
 mi.config ['$routeProvider', 'flashProvider'
