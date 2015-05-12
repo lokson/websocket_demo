@@ -1,5 +1,6 @@
 .row
   .col-sm-2.menu
-    %ul.list-unstyled{'ng-repeat':'user in users'}
+    %input{name:'keywords', 'ng-model':'keywords'}
+    %ul.list-unstyled{'ng-repeat':'user in users | filter:keywords'}
       %li{'ng-bind':'user.name'}
   .col-md-10

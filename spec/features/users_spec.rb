@@ -9,5 +9,9 @@ feature 'users', js: true do
     visit '/'
     expect(page).to have_content User.first.name
     expect(page).to have_content User.second.name
+
+    fill_in "keywords", with: User.first.name
+    expect(page).to have_content User.first.name
+    expect(page).not_to have_content User.second.name
   end
 end
