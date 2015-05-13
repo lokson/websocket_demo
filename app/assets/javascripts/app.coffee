@@ -17,13 +17,13 @@ mi.config ['$routeProvider', 'flashProvider'
     root_path = $('#root_path').html()
 
     $routeProvider
-    .when("#{root_path}",
+    .when("/",
       templateUrl: "#{root_path}users"
       controller: 'UsersController'
-    ).when("#{root_path}/users/new",
+    ).when("/users/new",
       templateUrl: "#{root_path}users/new"
       controller: 'UserController'
-    ).when("#{root_path}users/:id/edit",
+    ).when("/users/:id/edit",
       # todo: change to id
       # todo: read how to access id
       templateUrl: "#{root_path}users/1/edit"
