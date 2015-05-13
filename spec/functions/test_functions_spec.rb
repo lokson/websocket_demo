@@ -7,8 +7,8 @@ describe 'pluck to hash' do
     end
     it 'should return hash' do
       expected = [
-        {'id' => User.first.id, 'name' => User.first.name},
-        {'id' => User.second.id, 'name' => User.second.name}
+        {id: User.first.id, name: User.first.name},
+        {id: User.second.id, name: User.second.name}
       ]
       actual = pluck_to_hash User, :name, :id
       expect(actual).to eq expected

@@ -1,5 +1,5 @@
 def pluck_to_hash(model_class, *cols)
-  User.pluck(*cols).map { |a| Hash[cols.zip a].stringify_keys }
+  User.pluck(*cols).map { |a| Hash[cols.zip a] }
 end
 
 def json_fixtures(data:[], columns:[], generate_id:false)
@@ -10,6 +10,23 @@ def json_fixtures(data:[], columns:[], generate_id:false)
   end.to_json.html_safe
 end
 
-def json_parse(data)
-  JSON.parse(data).symbolize_keys
+def json_parse(string)
+  return unless string
+  parsed = json_symbolize JSON.parse(string)
+end
+
+def json_symbolize(data)
+  case data
+    when Array then data.map { |e| json_symbolize e }
+    when Hash then data.symbolize_keys
+  end
+end
+
+require 'active_record'
+ActiveRecord::Base.class_eval do
+  def self.only
+    raise "Expected to find one #{class_name} but none was found." if count == 0
+    raise "Expected to find one #{class_name} but #{count} were found." if count > 1
+    first
+  end
 end
