@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  layout false
   expose :users
   expose :user, attributes: :user_params
 

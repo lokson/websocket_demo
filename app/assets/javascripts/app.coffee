@@ -14,15 +14,19 @@ mi.config ['$routeProvider', 'flashProvider'
     flashProvider.infoClassnames.push 'alert-info'
     flashProvider.successClassnames.push 'alert-success'
 
+    root_path = $('#root_path').html()
+
     $routeProvider
-    .when('/',
-      templateUrl: 'users'
+    .when("#{root_path}",
+      templateUrl: "#{root_path}users"
       controller: 'UsersController'
-    ).when('/users/new',
-      templateUrl: "form.html"
+    ).when("#{root_path}/users/new",
+      templateUrl: "#{root_path}users/new"
       controller: 'UserController'
-    ).when('/users/:recipeId/edit',
-      templateUrl: "form.html"
+    ).when("#{root_path}users/:id/edit",
+      # todo: change to id
+      # todo: read how to access id
+      templateUrl: "#{root_path}users/1/edit"
       controller: 'UserController'
     )
 ]

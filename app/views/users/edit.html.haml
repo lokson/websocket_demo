@@ -1,6 +1,8 @@
-%div{'ng-app':'mi'}
-  %div{'ng-bind':'angular_test'}
-  %input{'ng-model':'angular_test'}
+angular working?
+%input{'ng-model':'testval'}
+%div{'ng-if':'testval'}
+  yes, you typed: {{testval}}
+
 = simple_form_for user do |f|
   = f.input :name
   = f.submit

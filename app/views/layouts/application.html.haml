@@ -5,5 +5,17 @@
     %title Mi
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-  %body
+  %body{'ng-app':'mi'}
     = yield
+
+    -#todo: think about other solutions
+    #root_path= root_path
+
+    -#todo: use rails root_path
+    -#- if Rails.env.development?
+    -#  :coffee
+    -#    ROOT_PATH = '/'
+    -#- if Rails.env.uat?
+    -#  :coffee
+    -#    ROOT_PATH = '/mi/'
+    -#
