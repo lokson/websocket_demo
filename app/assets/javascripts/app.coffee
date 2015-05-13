@@ -15,7 +15,6 @@ mi.config ['$routeProvider', 'flashProvider'
     flashProvider.successClassnames.push 'alert-success'
 
     root_path = $('#root_path').html()
-
     $routeProvider
     .when("/",
       templateUrl: "#{root_path}users"
