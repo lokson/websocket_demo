@@ -1,0 +1,3 @@
+%input{name:'keywords', 'ng-model':'keywords'}
+  %ul.list-unstyled{'ng-repeat':'user in users | filter:keywords'}
+    %li{'ng-bind':'user.name'}

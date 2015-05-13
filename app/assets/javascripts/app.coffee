@@ -1,11 +1,10 @@
 mi = angular.module 'mi', [
-  'templates',
   'ngRoute',
   'ngResource',
+  'ngAnimate',
   'controllers',
   'angular-flash.service',
   'angular-flash.flash-alert-directive',
-  'ngAnimate',
 ]
 
 mi.config ['$routeProvider', 'flashProvider'
@@ -17,8 +16,14 @@ mi.config ['$routeProvider', 'flashProvider'
 
     $routeProvider
     .when('/',
-      templateUrl: 'index.html'
+      templateUrl: 'users'
       controller: 'UsersController'
+    ).when('/users/new',
+      templateUrl: "form.html"
+      controller: 'UserController'
+    ).when('/users/:recipeId/edit',
+      templateUrl: "form.html"
+      controller: 'UserController'
     )
 ]
 

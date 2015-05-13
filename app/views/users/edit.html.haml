@@ -1,0 +1,6 @@
+%div{'ng-app':'mi'}
+  %div{'ng-bind':'angular_test'}
+  %input{'ng-model':'angular_test'}
+= simple_form_for user do |f|
+  = f.input :name
+  = f.submit

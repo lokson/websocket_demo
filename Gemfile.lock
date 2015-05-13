@@ -36,10 +36,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    angular-rails-templates (0.2.0)
-      railties (>= 3.1)
-      sprockets (~> 2)
-      tilt
     arel (6.0.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -188,13 +184,16 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     sexp_processor (4.5.1)
-    spring (1.3.5)
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
+    spring (1.3.6)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.3.0)
+    sprockets-rails (2.3.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
@@ -227,7 +226,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  angular-rails-templates
   binding_of_caller
   bower-rails
   byebug
@@ -250,6 +248,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   selenium-webdriver
+  simple_form
   spring
   sprockets (= 2.12.3)
   teaspoon

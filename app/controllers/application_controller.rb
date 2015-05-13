@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
       type.all { render nothing: true, status: 404 }
     end
   end
+
+  decent_configuration do
+    strategy DecentExposure::StrongParametersStrategy
+  end
 end

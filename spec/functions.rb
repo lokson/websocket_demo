@@ -9,3 +9,7 @@ def json_fixtures(data:[], columns:[], generate_id:false)
     res
   end.to_json.html_safe
 end
+
+def json_parse(data)
+  JSON.parse(data).symbolize_keys
+end
