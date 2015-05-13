@@ -8,9 +8,8 @@ describe UsersController do
       create_pair :user
       xhr :get, :index, format: :json
     end
+    it_should_behave_like :ok_page
     it 'should return two records' do
-      # todo behave_like :ok_page
-      expect(response.status).to eq 200
       results = JSON.parse response.body
       expect(results).to match pluck_to_hash(User, :name, :id)
     end
