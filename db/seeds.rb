@@ -5,5 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-config.include FactoryGirl::Syntax::Methods
+include FactoryGirl::Syntax::Methods
 create_list :user, 5
