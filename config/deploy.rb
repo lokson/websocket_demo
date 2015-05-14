@@ -16,16 +16,16 @@ namespace :deploy do
   end
 
   task :permit_temp do
-    execute_in_current 'chmod 777 -R tmp'
+    execute_in_current :chmod, "777 -R tmp"
+  end
+
+  task :restart do
+    execute_in_current :touch, 'touch tmp/restart.txt'
   end
 
   task :assets_precompile do
     return if !fetch :rails_env
     execute_in_current :bundle, "exec rake assets:precompile RAILS_ENV=#{fetch :rails_env}"
-  end
-
-  task :restart do
-    execute_in_current :touch, 'tmp/restart.txt'
   end
 
   task :db_reset do
