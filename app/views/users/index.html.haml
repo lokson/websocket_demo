@@ -1,6 +1,5 @@
--# todo users_path(1)
-%a{href:'#/users/1/edit'} edit first
 %input{name:'keywords', 'ng-model':'keywords'}
 %ul.list-unstyled.animate-leave{'ng-repeat':'user in users | filter:keywords'}
-  -# todo %a{href:'#/car/{{car.id}}'}
-  %li{'ng-bind':'user.name'}
+  %li
+    %a{href:'#/users/{{user.id}}/edit'}
+      {{user.name}}

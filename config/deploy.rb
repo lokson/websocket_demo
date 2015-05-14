@@ -28,6 +28,11 @@ namespace :deploy do
     execute_in_current :touch, 'tmp/restart.txt'
   end
 
+  task :db_reset do
+    return if !fetch :rails_env
+    execute_in_current :bundle, "exec rake db:reset RAILS_ENV=#{fetch :rails_env}"
+  end
+
   after :publishing, :permit_temp
   after :publishing, :assets_precompile
   after :publishing, :restart

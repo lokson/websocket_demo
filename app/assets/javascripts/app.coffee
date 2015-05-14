@@ -23,11 +23,11 @@ mi.config ['$routeProvider', 'flashProvider'
       templateUrl: "#{root_path}users/new"
       controller: 'UserController'
     ).when("/users/:id/edit",
-      # todo: change to id
-      # todo: read how to access id
-      templateUrl: "#{root_path}users/1/edit"
+      templateUrl: (params) -> "#{root_path}users/#{params.id}/edit"
       controller: 'UserController'
     )
 ]
 
 controllers = angular.module 'controllers', []
+
+# todo: url helper like edit_users_path(1) => '#/users/{{user.id}}/edit'
