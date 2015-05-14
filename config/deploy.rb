@@ -37,10 +37,15 @@ namespace :deploy do
     execute_in_current :bundle, "exec rake db:reset RAILS_ENV=#{fetch :rails_env}"
   end
 
+  task :bundle do
+    execute_in_current :bundle
+  end
+
   # list all here:
   after :publishing, :permit_temp
   after :publishing, :assets_precompile
   # after :publishing, :update_bins
   # after :publishing, :restart
   # after :publishing, :db_reset
+  # after :publishing, :bundle
 end
