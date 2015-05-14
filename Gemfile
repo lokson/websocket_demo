@@ -29,9 +29,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'capistrano-bundler'
   gem 'capistrano-rails'
+  gem 'capistrano-bundler'
   gem 'capistrano-rvm'
-  gem 'binding_of_caller'
   gem 'html2haml'
 end

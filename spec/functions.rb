@@ -11,7 +11,7 @@ def json_fixtures(data:[], columns:[], generate_id:false)
 end
 
 def json_parse(string)
-  return unless string
+  return if !string
   parsed = json_symbolize JSON.parse(string)
 end
 

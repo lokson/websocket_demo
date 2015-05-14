@@ -226,7 +226,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  binding_of_caller
   bower-rails
   byebug
   capistrano-bundler

@@ -7,24 +7,25 @@ set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :deploy do
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      execute :touch, release_path.join('tmp/restart.txt')
+  def execute_in_current(*args)
+    on roles(:app) do
+      within release_path do
+        execute *args
+      end
     end
   end
 
   task :permit_temp do
-    on 'root@ground' do
-      execute "cd #{release_path} && chmod 777 -R tmp"
-    end
+    execute_in_current 'chmod 777 -R tmp'
   end
 
   task :assets_precompile do
-    on 'root@ground' do
-      execute "cd #{release_path} && RAILS_ENV=#{rails_env} rake assets:precompile"
-    end
+    return if !fetch :rails_env
+    execute_in_current :bundle, "exec rake assets:precompile RAILS_ENV=#{fetch :rails_env}"
+  end
+
+  task :restart do
+    execute_in_current :touch, 'tmp/restart.txt'
   end
 
   after :publishing, :permit_temp
