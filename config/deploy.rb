@@ -17,10 +17,17 @@ namespace :deploy do
 
   task :permit_temp do
     on 'root@ground' do
-      execute 'chmod 777 -R /home/root/mi/shared/tmp'
+      execute "cd #{release_path} && chmod 777 -R tmp"
     end
   end
 
-  after :publishing, :restart
+  task :assets_precompile do
+    on 'root@ground' do
+      execute "cd #{release_path} && RAILS_ENV=#{rails_env} rake assets:precompile"
+    end
+  end
+
   after :publishing, :permit_temp
+  after :publishing, :assets_precompile
+  after :publishing, :restart
 end
