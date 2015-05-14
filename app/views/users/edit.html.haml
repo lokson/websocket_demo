@@ -1,8 +1,7 @@
-angular working?
-%input{'ng-model':'testval'}
-%div{'ng-if':'testval'}
-  yes, you typed: {{testval}}
-
 = simple_form_for user do |f|
-  = f.input :name
+  = f.input :name, input_html: { 'ng-model':'user.name' }
   = f.submit
+
+%div{'ng-if':'user.name'}
+  you typed: {{user.name}}
+
