@@ -1,5 +1,5 @@
 %input{name:'keywords', 'ng-model':'keywords'}
-%ul.list-unstyled.animate-leave{'ng-repeat':'user in users | filter:keywords'}
+%ul.list-unstyled.animate-leave{'ng-repeat':'user in users | filter:keywords | orderBy:"name"' }
   %li
     %a{href:'#/users/{{user.id}}/edit'}
       {{user.name}}

@@ -14,6 +14,18 @@ describe UsersController do
     it_should_behave_like :ok_page
   end
 
+  describe 'show' do
+    before do
+      user = create :user
+      xhr :get, :show, id: user.id, format: :json
+    end
+    it('should return record') do
+      # todo: rspec hash matcher not sensible to string/symbol keys
+      expect(json_parse response.body).to eq User.only.slice(:id, :name).symbolize_keys
+    end
+    it_should_behave_like :ok_page
+  end
+
   describe 'edit' do
     before do
       user = create :user

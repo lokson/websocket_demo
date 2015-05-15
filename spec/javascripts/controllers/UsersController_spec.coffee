@@ -5,12 +5,11 @@ describe 'UsersController', ->
   users = fixture.json[0]
 
   setupController = ->
-    inject ($location, $rootScope, $httpBackend, $controller) ->
+    inject ($rootScope, $httpBackend, $controller) ->
       scope = $rootScope.$new()
-      location = $location
       httpBackend = $httpBackend
+      $controller 'UsersController', $scope: scope
       httpBackend.expectGET(new RegExp('\/users')).respond users
-      $controller 'UsersController', $scope: scope, $location: location
 
   beforeEach ->
     module 'mi'
