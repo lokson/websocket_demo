@@ -9,17 +9,17 @@ describe 'UsersController', ->
       scope = $rootScope.$new()
       httpBackend = $httpBackend
       $controller 'UsersController', $scope: scope
-      httpBackend.expectGET(new RegExp('\/users')).respond users
-
-  beforeEach ->
-    module 'mi'
-    setupController()
-    httpBackend.flush()
+      httpBackend
+        .expectGET new RegExp '\/users'
+        .respond users
 
   afterEach ->
     httpBackend.verifyNoOutstandingExpectation()
     httpBackend.verifyNoOutstandingRequest()
 
   describe 'initialization', ->
-    it 'loads users from backend', ->
+    it 'gets from backend', ->
+      module 'mi'
+      setupController()
+      httpBackend.flush()
       expect(angular.equals(scope.users, users)).toBeTruthy()

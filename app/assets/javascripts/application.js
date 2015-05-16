@@ -17,4 +17,5 @@
 //= require angular-resource/angular-resource
 //= require angular-flash/dist/angular-flash
 //= require angular-animate/angular-animate
+//= require angular-ui-router/release/angular-ui-router
 //= require_tree .

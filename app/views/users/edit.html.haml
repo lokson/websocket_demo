@@ -1,7 +1,1 @@
-= simple_form_for user do |f|
-  = f.input :name, input_html: { 'ng-model':'user.name' }
-  = f.submit
-
-%div{'ng-if':'user.name'}
-  you typed: {{user.name}}
-
+= render 'form'

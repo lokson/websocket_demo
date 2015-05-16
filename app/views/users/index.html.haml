@@ -1,5 +1,11 @@
-%input{name:'keywords', 'ng-model':'keywords'}
-%ul.list-unstyled.animate-leave{'ng-repeat':'user in users | filter:keywords | orderBy:"name"' }
-  %li
-    %a{href:'#/users/{{user.id}}/edit'}
-      {{user.name}}
+.col-sm-2
+  %input{name:'keywords', 'ng-model':'keywords'}
+  %ul.list-unstyled.animate-leave{'ng-repeat':'user in users | filter:keywords | orderBy:"name"' }
+    %li
+      %a{'ng-click':'edit(user)'}
+        {{user.name}}
+  %a.glyphicon.glyphicon-plus{'ng-click':'new()'}
+.col-sm-10
+  %div{'ui-view':''}
+
+

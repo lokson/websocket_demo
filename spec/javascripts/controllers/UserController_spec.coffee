@@ -21,16 +21,58 @@ describe 'UserController', ->
 
       $controller 'UserController', $scope: scope
 
-  beforeEach ->
-    module 'mi'
-    setupController(true, user.id)
-    httpBackend.flush()
-
   afterEach ->
     httpBackend.verifyNoOutstandingExpectation()
     httpBackend.verifyNoOutstandingRequest()
 
   describe 'initialization', ->
-    it 'loads users from backend', ->
+    beforeEach ->
+      module 'mi'
+      setupController(true, user.id)
+      httpBackend.flush()
+
+    it 'gets from backend', ->
       # todo: custom matcher
       expect(angular.equals(scope.user, user)).toBeTruthy()
+
+  describe 'update', ->
+    it 'puts to backend', ->
+      # todo: use factories here
+      changes =
+        name: 'Luke Changed'
+        id: user.id
+
+      module 'mi'
+      setupController(true, user.id)
+
+      scope.user = changes
+      httpBackend.flush()
+      scope.save()
+      httpBackend
+        .expectPUT new RegExp "\/users"
+        .respond 200, changes
+
+
+
+
+
+
+
+
+
+
+#    describe 'update', ->
+#      updatedRecipe =
+#        name: 'Toast'
+#        instructions: 'put in toaster, push lever, add butter'
+#      beforeEach ->
+#        setupController()
+#        httpBackend.flush()
+#        request = new RegExp("\/recipes")
+#        httpBackend.expectPUT(request).respond(204)
+#      it 'posts to the backend', ->
+#        scope.recipe.name = updatedRecipe.name
+#        scope.recipe.instructions = updatedRecipe.instructions
+#        scope.save()
+#        httpBackend.flush()
+#        expect(location.path()).toBe("/recipes/#{scope.recipe.id}")
