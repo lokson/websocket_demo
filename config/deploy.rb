@@ -23,6 +23,11 @@ namespace :deploy do
     execute_in_current :touch, 'touch tmp/restart.txt'
   end
 
+  task :assets_clean do
+    return if !fetch :rails_env
+    execute_in_current :bundle, "exec rake assets:clean RAILS_ENV=#{fetch :rails_env}"
+  end
+
   task :assets_precompile do
     return if !fetch :rails_env
     execute_in_current :bundle, "exec rake assets:precompile RAILS_ENV=#{fetch :rails_env}"
@@ -43,9 +48,10 @@ namespace :deploy do
 
   # list all here:
   after :publishing, :permit_temp
+  after :publishing, :assets_clean
   after :publishing, :assets_precompile
-  # after :publishing, :update_bins
-  # after :publishing, :restart
+  after :publishing, :update_bins
+  after :publishing, :restart
   # after :publishing, :db_reset
   # after :publishing, :bundle
 end

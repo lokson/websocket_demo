@@ -1,6 +1,7 @@
 angular.module("mi")
 .factory "User", ($resource) ->
-  $resource "/users/:id",
+  root_path = $('#root_path').html()
+  $resource "#{root_path}users/:id",
     { id: "@id", format: 'json' },
     {
       'update': { method: 'PUT' }
