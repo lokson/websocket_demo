@@ -50,7 +50,7 @@ namespace :deploy do
   after :publishing, :permit_temp
   after :publishing, :assets_clean
   after :publishing, :assets_precompile
-  after :publishing, :update_bins
+  # after :publishing, :update_bins
   after :publishing, :restart
   # after :publishing, :db_reset
   # after :publishing, :bundle

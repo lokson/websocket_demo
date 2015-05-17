@@ -27,7 +27,7 @@ mi.config ['flashProvider', '$stateProvider', '$urlRouterProvider'
         url: '/new'
         templateUrl: "#{root_path}users/new"
       ).state('users.edit',
-        url: '/users/:id/edit'
+        url: '/:id/edit'
         templateUrl: (params) -> "#{root_path}users/#{params.id}/edit"
       )
 ]

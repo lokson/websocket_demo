@@ -1,6 +1,6 @@
 controllers = angular.module 'controllers'
-controllers.controller 'UsersController', ['$scope', '$resource', '$routeParams', '$location', 'User', '$state'
-  ($scope, $resource, $routeParams, $location, User, $state) ->
+controllers.controller 'UsersController', ['$scope', '$routeParams', 'User', '$state'
+  ($scope, $routeParams, User, $state) ->
     $scope.load = ->
       $scope.users = User.query()
       if $routeParams.id
@@ -18,14 +18,14 @@ controllers.controller 'UsersController', ['$scope', '$resource', '$routeParams'
       if user.id
         User.update user
       else
-        User.create user
+        $scope.users.push(User.create user)
       $state.go 'users'
-      $scope.load()
 
     $scope.delete = (user) ->
       User.delete user
+      i = $scope.users.indexOf(user)
+      $scope.users.splice(i,1)
       $state.go 'users'
-      $scope.load()
 
     $scope.load()
 ]
