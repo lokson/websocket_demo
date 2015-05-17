@@ -14,6 +14,7 @@ gem 'haml'
 gem 'decent_exposure'
 gem 'simple_form'
 gem 'factory_girl_rails', '~> 4.0'
+gem 'websocket-rails'
 
 group :development, :test do
   gem 'byebug'
