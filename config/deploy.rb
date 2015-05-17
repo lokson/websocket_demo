@@ -46,6 +46,14 @@ namespace :deploy do
     execute_in_current :bundle
   end
 
+  task :websocket_start do
+    execute_in_current :bundle, 'exec rake websocket_rails:start_server'
+  end
+
+  task :websocket_stop do
+    execute_in_current :bundle, 'exec rake websocket_rails:stop_server'
+  end
+
   # list all here:
   after :publishing, :permit_temp
   after :publishing, :assets_clean

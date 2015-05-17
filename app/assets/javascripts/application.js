@@ -19,3 +19,5 @@
 //= require angular-animate/angular-animate
 //= require angular-ui-router/release/angular-ui-router
 //= require_tree .
+//= require websocket_rails/main
+
