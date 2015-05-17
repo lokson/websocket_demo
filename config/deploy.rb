@@ -55,14 +55,14 @@ namespace :deploy do
   end
 
   # list all here:
-  before :publishing, :websocket_stop
+  # before :publishing, :websocket_stop
   after :publishing, :permit_temp
   after :publishing, :assets_clean
   after :publishing, :assets_precompile
   # after :publishing, :update_bins
   # after :publishing, :db_reset
   after :publishing, :restart
-  after :publishing, :websocket_start
+  # after :publishing, :websocket_start
 
   # bundle seems to be part of deploy as default
   # after :publishing, :bundle

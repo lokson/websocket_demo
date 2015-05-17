@@ -28,5 +28,7 @@ module MiBackend
 
     config.assets.precompile += %w( bootstrap/glyphicons-halflings-regular.woff2 )
     config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff)$)
+
+    config.middleware.delete Rack::Lock
   end
 end
