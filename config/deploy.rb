@@ -46,11 +46,11 @@ namespace :deploy do
     execute_in_current :bundle
   end
 
-  task :websocket_start do
+  task :wsoc_start do
     execute_in_current :bundle, 'exec rake websocket_rails:start_server'
   end
 
-  task :websocket_stop do
+  task :wsoc_stop do
     execute_in_current :bundle, 'exec rake websocket_rails:stop_server'
   end
 
