@@ -30,7 +30,7 @@ controllers.controller 'UsersController', ['$scope', '$routeParams', 'User', '$s
     $scope.load()
 
     root_path = $('#root_path').html()
-    if root_path = '/'
+    if root_path == '/'
       conn = new WebSocketRails('localhost:3001/websocket')
     else
       conn = new WebSocketRails('kapustka.net:3001/websocket')
