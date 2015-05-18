@@ -33,7 +33,7 @@ controllers.controller 'UsersController', ['$scope', '$routeParams', 'User', '$s
     if root_path == '/'
       conn = new WebSocketRails('localhost:3001/websocket')
     else
-      conn = new WebSocketRails('kapustka.net:3001/websocket')
+      conn = new WebSocketRails('kapustka.net:3001/mi/websocket')
     conn.on_open = ->
       console.log 'on open'
     conn.on_message = (e) ->
