@@ -1,8 +1,8 @@
 class LiveController < WebsocketRails::BaseController
-  def create
-    byebug
-    User.create! message
-    send_message :create_success, user, namespace: :users
+  def new
+    # User.create! message
+    user = User.create! name: "Skywalker nr: #{rand 1000}"
+    broadcast_message :create_success, user, namespace: :users
   end
 end
 

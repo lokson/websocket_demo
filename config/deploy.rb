@@ -54,16 +54,28 @@ namespace :deploy do
     execute_in_current :bundle, 'exec rake websocket_rails:stop_server'
   end
 
+  task :redis_start do
+    execute_in_current :service, 'redis-server start'
+  end
+
+  task :redis_stop do
+    execute_in_current :service, 'redis-server stop'
+  end
+
+
   # list all here:
-  # before :publishing, :websocket_stop
   after :publishing, :permit_temp
   after :publishing, :assets_clean
   after :publishing, :assets_precompile
   # after :publishing, :update_bins
   # after :publishing, :db_reset
   after :publishing, :restart
-  # after :publishing, :websocket_start
 
-  # bundle seems to be part of deploy as default
+  # before :publishing, :websocket_stop
+  # after :publishing, :websocket_start
+  # after :publishing, :redis_stop
+  # after :publishing, :redis_start
+
+  # bundle seems to be default part of the deploy
   # after :publishing, :bundle
 end
