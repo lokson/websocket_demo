@@ -29,7 +29,11 @@ controllers.controller 'UsersController', ['$scope', '$routeParams', 'User', '$s
 
     $scope.load()
 
-    conn = new WebSocketRails('localhost:3001/websocket')
+    root_path = $('#root_path').html()
+    if root_path = '/'
+      conn = new WebSocketRails('localhost:3001/websocket')
+    else
+      conn = new WebSocketRails('kapustka.net:3001/websocket')
     conn.on_open = ->
       console.log 'on open'
     conn.on_message = (e) ->
