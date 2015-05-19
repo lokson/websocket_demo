@@ -47,11 +47,13 @@ namespace :deploy do
   end
 
   task :wsoc_start do
-    execute_in_current :bundle, 'exec rake websocket_rails:start_server'
+    return if !fetch :rails_env
+    execute_in_current :bundle, "exec rake websocket_rails:start_server RAILS_ENV=#{fetch :rails_env}"
   end
 
   task :wsoc_stop do
-    execute_in_current :bundle, 'exec rake websocket_rails:stop_server'
+    return if !fetch :rails_env
+    execute_in_current :bundle, "exec rake websocket_rails:stop_server RAILS_ENV=#{fetch :rails_env}"
   end
 
   task :redis_start do
@@ -62,20 +64,27 @@ namespace :deploy do
     execute_in_current :service, 'redis-server stop'
   end
 
+  task :wsoc_log do
+    execute_in_current "{ tail -f #{release_path}/log/websocket_rails.log & tail -f #{release_path}/log/websocket_rails_server.log; }"
+  end
 
-  # list all here:
+  task :log do
+    execute_in_current :tail, "-f log/#{fetch :rails_env}.log"
+  end
+
   after :publishing, :permit_temp
   after :publishing, :assets_clean
   after :publishing, :assets_precompile
-  # after :publishing, :update_bins
-  # after :publishing, :db_reset
-  after :publishing, :restart
-
-  # before :publishing, :websocket_stop
-  # after :publishing, :websocket_start
-  # after :publishing, :redis_stop
-  # after :publishing, :redis_start
+  after :publishing, :wsoc_stop
+  after :publishing, :wsoc_start
 
   # bundle seems to be default part of the deploy
   # after :publishing, :bundle
+  # after :publishing, :wsoc_log
+  # after :publishing, :log
+  # after :publishing, :update_bins
+  # after :publishing, :db_reset
+  # after :publishing, :redis_stop
+  # after :publishing, :redis_start
+  after :publishing, :restart
 end
