@@ -14,3 +14,4 @@
 database.yml
 .idea
 .DS_STORE
+dump.rdb

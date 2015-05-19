@@ -4,6 +4,8 @@ class UsersController < ApplicationController
 
   def create
     user.save!
+    # WebsocketRails[:users].trigger 'create', user
+    # WebsocketRails[:diffusions].trigger 'diffusions.new', {test: self.id}.to_json
   end
 
   def update
