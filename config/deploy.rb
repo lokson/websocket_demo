@@ -94,9 +94,9 @@ namespace :deploy do
   after :publishing, :permit_temp
   after :publishing, :update_bins
   after :publishing, :assets_precompile
-  # after :publishing, :db_reset
+  after :publishing, :db_reset
   # after :publishing, :wsocp_open
-  # after :publishing, :wsoc_start
+  after :publishing, :wsoc_start
 
   after :publishing, :restart
 end

@@ -13,7 +13,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # passenger relative_url is not avaible during assets precompile
-  config.action_controller.relative_url_root = '/wsoc_demo'
+  config.action_controller.relative_url_root = '/websocket_demo'
 
   # use mangle:false to temporary solve injector problems
   config.assets.js_compressor = :uglifier
