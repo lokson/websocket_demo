@@ -4,8 +4,6 @@ class UsersController < ApplicationController
 
   def create
     user.save!
-    # WebsocketRails[:users].trigger 'create', user
-    # WebsocketRails[:diffusions].trigger 'diffusions.new', {test: self.id}.to_json
   end
 
   def update
@@ -13,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user.destroy
+    user.destroy!
     head 200
   end
 
