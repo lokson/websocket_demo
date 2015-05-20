@@ -12,7 +12,7 @@ controllers.controller 'UsersController', ['$scope', '$routeParams', 'User', '$s
 
     $scope.edit = (user) ->
       $state.go('users.edit', id:user.id)
-      .then -> $scope.user = user
+        .then -> $scope.user = user
 
     $scope.save = (user) ->
       if user.id

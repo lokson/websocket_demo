@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'mi'
-set :repo_url, 'git@github.com:lokson/websocket_demo.git'
+set :repo_url, 'git@internal.motabi.pl:mi-backend'
 set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
@@ -23,14 +23,17 @@ namespace :deploy do
     execute_in_current :touch, 'touch tmp/restart.txt'
   end
 
-  task :assets_precompile do
+  task :assets_clean do
     return if !fetch :rails_env
     execute_in_current :bundle, "exec rake assets:clean RAILS_ENV=#{fetch :rails_env}"
+  end
+
+  task :assets_precompile do
+    return if !fetch :rails_env
     execute_in_current :bundle, "exec rake assets:precompile RAILS_ENV=#{fetch :rails_env}"
   end
 
   task :update_bins do
-    execute_in_current :rm, "-rf #{release_path}/bin"
     execute_in_current :bundle, "exec rake rails:update:bin"
   end
 
@@ -69,34 +72,19 @@ namespace :deploy do
     execute_in_current :tail, "-f log/#{fetch :rails_env}.log"
   end
 
-  task :wsocp_open do
-    return if ! fetch :wsoc_port
-    execute_in_current :iptables, "-A OUTPUT -p tcp --dport #{fetch :wsoc_port} -j ACCEPT"
-    # todo: read is this required, and what --syn means
-    execute_in_current :iptables, "-I INPUT -p tcp --dport #{fetch :wsoc_port} --syn -j ACCEPT"
-  end
-
-  task :wsocp_close do
-    return if ! fetch :wsoc_port
-    execute_in_current :iptables, "-A OUTPUT -p tcp --dport #{fetch :wsoc_port} -j DROP"
-    execute_in_current :iptables, "-I INPUT -p tcp --dport #{fetch :wsoc_port} --syn -j DROP"
-  end
-
-  # after :publishing, :redis_start
-  # after :publishing, :wsoc_stop
-  # after :publishing, :redis_stop
-  # after :publishing, :wsocp_close
-  # after :publishing, :wsoc_log
-  # after :publishing, :log
-
-
-
   after :publishing, :permit_temp
-  after :publishing, :update_bins
+  after :publishing, :assets_clean
   after :publishing, :assets_precompile
-  after :publishing, :db_reset
-  # after :publishing, :wsocp_open
+  after :publishing, :wsoc_stop
   after :publishing, :wsoc_start
 
+  # bundle seems to be default part of the deploy
+  # after :publishing, :bundle
+  # after :publishing, :wsoc_log
+  # after :publishing, :log
+  # after :publishing, :update_bins
+  # after :publishing, :db_reset
+  # after :publishing, :redis_stop
+  # after :publishing, :redis_start
   after :publishing, :restart
 end
