@@ -69,23 +69,23 @@ namespace :deploy do
     execute_in_current :tail, "-f log/#{fetch :rails_env}.log"
   end
 
-  task :wsocp_open do
+  task :wsoc_port_open do
     return if ! fetch :wsoc_port
     execute_in_current :iptables, "-A OUTPUT -p tcp --dport #{fetch :wsoc_port} -j ACCEPT"
     # todo: read is this required, and what --syn means
     execute_in_current :iptables, "-I INPUT -p tcp --dport #{fetch :wsoc_port} --syn -j ACCEPT"
   end
 
-  task :wsocp_close do
+  task :wsoc_port_close do
     return if ! fetch :wsoc_port
     execute_in_current :iptables, "-A OUTPUT -p tcp --dport #{fetch :wsoc_port} -j DROP"
     execute_in_current :iptables, "-I INPUT -p tcp --dport #{fetch :wsoc_port} --syn -j DROP"
   end
 
+  # after :publishing, :wsoc_port_close
   # after :publishing, :redis_start
   # after :publishing, :wsoc_stop
   # after :publishing, :redis_stop
-  # after :publishing, :wsocp_close
   # after :publishing, :wsoc_log
   # after :publishing, :log
 
@@ -94,9 +94,9 @@ namespace :deploy do
   after :publishing, :permit_temp
   after :publishing, :update_bins
   after :publishing, :assets_precompile
-  after :publishing, :db_reset
-  # after :publishing, :wsocp_open
-  after :publishing, :wsoc_start
+  # after :publishing, :db_reset
+  # after :publishing, :wsoc_port_open
+  # after :publishing, :wsoc_start
 
   after :publishing, :restart
 end
