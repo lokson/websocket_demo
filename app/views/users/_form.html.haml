@@ -1,5 +1,5 @@
 = simple_form_for user, url: '' do |f|
-  = f.input :name, input_html: { 'ng-model':'user.name', 'ng-required':'true' }
+  = f.input :name, input_html: { 'ng-model':'user.name' }
   = f.submit class:'btn btn-primary', 'ng-click':'save(user)', onclick: 'return false'
   - if user.persisted?
     %button.btn.btn-danger{'ng-click':'delete(user)'} Delete

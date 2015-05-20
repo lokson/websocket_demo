@@ -12,9 +12,9 @@ WebsocketRails::EventMap.describe do
   #   end
   # The above will handle an event triggered on the client like `product.new`.
 
-  # namespace :users do
-  #   subscribe :create, 'live#create'
-  #   subscribe :update, 'live#update'
-  #   subscribe :delete, 'live#delete'
-  # end
+  namespace :users do
+    subscribe :create, 'live#create'
+    subscribe :update, 'live#update'
+    subscribe :delete, 'live#delete'
+  end
 end
