@@ -10,9 +10,9 @@ controllers.controller 'UsersController', ['$scope', '$routeParams', 'User', '$s
       # todo: set root_path and open websocket as separate services
       root_path = $('#root_path').html()
       if root_path == '/'
-        $scope.wsoc = new WebSocketRails('localhost:3001/websocket')
+        $scope.wsoc = new WebSocketRails('localhost:3002/websocket')
       else
-        $scope.wsoc = new WebSocketRails('kapustka.net:3001/websocket')
+        $scope.wsoc = new WebSocketRails('kapustka.net:3002/websocket')
 
       # todo: store users extension as hash by id
       $scope.wsoc.bind 'users.create_success', (data) ->

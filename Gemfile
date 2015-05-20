@@ -15,7 +15,6 @@ gem 'decent_exposure'
 gem 'simple_form'
 gem 'factory_girl_rails', '~> 4.0'
 gem 'websocket-rails'
-# gem 'websocket-rails', github: 'moaa/websocket-rails', branch: 'sync_fixes'
 
 group :development, :test do
   gem 'byebug'
